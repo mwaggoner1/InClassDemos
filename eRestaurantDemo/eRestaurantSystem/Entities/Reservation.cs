@@ -20,5 +20,19 @@ namespace eRestaurantSystem.Entities
         public string ReservationStatus { get; set; }
         public string EventCode { get; set; }
 
+        // Navigation Properties
+        public virtual SpecialEvent Event { get; set; }
+        
+        // the reservations table is a many to many relationship to the tables table
+        // the SQL reservationsTable resolves this problem however
+        // reservationsTable holds only a compound primary key.
+        // we will not create a reservationsTable entity in our project
+        // but handle it via navigation mapping
+        // therefore we will place a iCollection<> property in this entity 
+        // refering to the tables table.
+
+        public virtual ICollection<Table> Tables { get; set; }
+
+
     }
 }
