@@ -12,6 +12,8 @@ namespace eRestaurantSystem.Entities
     {
         [Key]
         public int TableID { get; set; }
+        [Required(ErrorMessage="Table Number is Required")]
+        [Range(1, 25, ErrorMessage="Table Number must be a positive number")]
         public byte TableNumber { get; set; }
         public bool Smoking { get; set; }
         public int Capacity { get; set; }

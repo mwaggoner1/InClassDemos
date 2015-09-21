@@ -12,12 +12,21 @@ namespace eRestaurantSystem.Entities
     {
         [Key]
         public int ReservationID { get; set; }
-
+        [Required]
+        [StringLength(40, ErrorMessage="Customer Name Must be Less Than 40 Characters")]
         public string CustomerName { get; set; }
+        [Required(ErrorMessage = "Reservation Date Is Required")]
         public DateTime ReservationDate { get; set; }
+        [Required(ErrorMessage = "Number In Party Is Required")]
+        [Range(1, 16, ErrorMessage="Party Size Cannot Exceeed 16 People")]
         public int NumberInParty { get; set; }
+        [Required(ErrorMessage = "Contact Phone Number Is Required")]
+        [StringLength(15, ErrorMessage="Contact Phone Number Must be Less Than 15 Characters")]
         public string ContactPhone { get; set; }
+        [Required(ErrorMessage="Reservation Status Code Is Required")]
+        [StringLength(1, ErrorMessage = "Reservation Status Code Must be 1 Character")]
         public string ReservationStatus { get; set; }
+        [StringLength(1, ErrorMessage = "Event Code Must be 1 Character")]
         public string EventCode { get; set; }
 
         // Navigation Properties
