@@ -25,23 +25,33 @@ namespace eRestaurantSystem.BLL
                 // method syntax
                 return context.SpecialEvents.OrderBy(x => x.Description).ToList();
 
-
             }
         }
 
         [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<SpecialEvent> SpecialEvent_Table_List(string eventCode)
+        public List<Reservation> ReservationsByEventCode_List(string eventCode)
         {
+            if(eventCode == "" || eventCode == null) {
+                return new List<Reservation>();
+            }
             // the using is a transaction!
             using (var context = new eRestaurantContext())
             {
                 // retrieve the data from the SpecialEvents Table
 
                 // change this to list the tables
-                return context.SpecialEvents.OrderBy(x => x.Description).ToList();
+                // query syntax
+                var results = from item in context.Reservations
+                              where item.EventCode.Equals(eventCode)
+                              orderby item.ReservationDate, item.CustomerName
+                              select item;
+
+                return results.ToList();
 
             }
         }
 
     }
 }
+
+
