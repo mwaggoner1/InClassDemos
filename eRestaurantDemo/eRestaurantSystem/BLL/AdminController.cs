@@ -53,11 +53,16 @@ namespace eRestaurantSystem.BLL
             }
         }
 
-        
+
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<ReservationByDate> GetReservationsByDate(string date)
         {
-            using (var context = new eRestaurantContext())  {
+            if (date == "" || date == null)
+            {
+                return new List<ReservationByDate>();
+            }
+            using (var context = new eRestaurantContext())
+            {
                 // remember linq does not like using datetime casting.
                 int year = (DateTime.Parse(date)).Year;
                 int month = (DateTime.Parse(date)).Month;
@@ -70,9 +75,9 @@ namespace eRestaurantSystem.BLL
                               {
                                   Description = item.Description,
                                   Reservations = from row in item.Reservations
-                                                 where row.ReservationDate.Year  == year &&
+                                                 where row.ReservationDate.Year == year &&
                                                        row.ReservationDate.Month == month &&
-                                                       row.ReservationDate.Day   == day
+                                                       row.ReservationDate.Day == day
                                                  select new ReservationDetail() // POCO
                                                  {
                                                      CustomerName = row.CustomerName,
@@ -80,6 +85,35 @@ namespace eRestaurantSystem.BLL
                                                      NumberInParty = row.NumberInParty,
                                                      ContactPhone = row.ContactPhone,
                                                      ReservationStatus = row.ReservationStatus
+                                                 }
+                              };
+                return results.ToList();
+
+            }
+
+        }
+
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<CategoryMenuItem> CategoryMenuItems_List()
+        {
+            
+            using (var context = new eRestaurantContext())
+            {
+
+                //query syntax
+                var results = from item in context.MenuCategories
+                              orderby item.Description
+                              select new CategoryMenuItem()
+                              {
+                                  Description = item.Description,
+                                  MenuItems = from row in item.MenuItems
+                                                 select new MenuItem() // POCO
+                                                 {
+                                                     Description = row.Description,
+                                                     Price = row.CurrentPrice,
+                                                     Calories = row.Calories,
+                                                     Comment = row.Comment
                                                  }
                               };
                 return results.ToList();
