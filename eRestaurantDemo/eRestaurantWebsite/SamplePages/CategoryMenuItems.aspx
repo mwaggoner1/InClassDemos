@@ -14,9 +14,9 @@
                 <asp:Repeater ID="Catorgies" runat="server" DataSourceID="CategoryMenuItemsDataSource" >
                     <ItemTemplate>
                         <h3>
+                            <img width="80" height="80" style="margin-right:30px" src='<%# "../Images/" +Eval("Description")+ "-1.png"  %>' />
                             <%# Eval("Description") %>
                         </h3>
-                        
                         <table class="table table-striped">
                             <thead>
                                 <th style="width:375px">Name</th>
