@@ -27,7 +27,7 @@ namespace eRestaurantSystem.Entities
         
 
         public SpecialEvent() {
-            
+            Active = true;
         }
     
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System;
 using eRestaurantSystem.Entities;
 using eRestaurantSystem.DAL;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ namespace eRestaurantSystem.BLL
     [DataObject]
     public class AdminController
     {
-
+        #region Query Samples
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<SpecialEvent> SpecialEvent_List()
         {
@@ -121,6 +121,46 @@ namespace eRestaurantSystem.BLL
             }
 
         }
+
+        #endregion
+
+
+        #region CRUD insert update delete
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public void SpecialEvents_Add(SpecialEvent item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                var added = context.SpecialEvents.Add(item);
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void SpecialEvents_Update(SpecialEvent item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+
+                context.Entry<SpecialEvent>(context.SpecialEvents.Attach(item)).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public void SpecialEvents_Delete(SpecialEvent item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                var existing = context.SpecialEvents.Find(item.EventCode);
+                context.SpecialEvents.Remove(existing);
+                context.SaveChanges();
+            }
+        }
+        #endregion
+
+
     }
 }
 
