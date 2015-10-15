@@ -124,7 +124,7 @@ namespace eRestaurantSystem.BLL
 
         #endregion
 
-
+        /*  Special Events CRUD */
         #region CRUD insert update delete
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public void SpecialEvents_Add(SpecialEvent item)
@@ -155,6 +155,61 @@ namespace eRestaurantSystem.BLL
             {
                 var existing = context.SpecialEvents.Find(item.EventCode);
                 context.SpecialEvents.Remove(existing);
+                context.SaveChanges();
+            }
+        }
+        #endregion
+
+
+        /* Waiter CRUD */
+        #region CRUD insert update delete
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public Waiter Waiter_GetWaiterById(int id)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                return context.Waiters.Find(id);
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<Waiter> Waiters_List()
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                return context.Waiters.OrderBy(x => x.FirstName).ToList();
+            }
+        }
+        
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
+        public void Waiter_Add(Waiter item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                var added = context.Waiters.Add(item);
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void Waiter_Update(Waiter item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+
+                context.Entry<Waiter>(context.Waiters.Attach(item)).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
+        public void Waiter_Delete(Waiter item)
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                var existing = context.Waiters.Find(item.WaiterID);
+                context.Waiters.Remove(existing);
                 context.SaveChanges();
             }
         }

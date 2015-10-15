@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="SpecialEventsAdmin.aspx.cs" Inherits="CommandPages_SpecialEventsAdmin" %>
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="my" TagName="MessageUserControl" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <h1>Special Events Admin</h1>
-
-    <%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="my" TagName="MessageUserControl" %>
-    <my:MessageUserControl runat="server" ID="MessageUserControl" />
+    <br />
+    <my:MessageUserControl ID="MessageUserControl" runat="server" />
+    <br /><br />
 
     <asp:ListView ID="SpeicalEventsDisplay" runat="server" DataSourceID="SpecialEventsObjectDataSource" InsertItemPosition="LastItem" DataKeyNames="EventCode">
         <AlternatingItemTemplate>

@@ -21,12 +21,18 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
     private const string STR_TITLE_ICON_success = "glyphicon glyphicon-ok-sign";
     private const string STR_PANEL_success = "panel panel-success";
     #endregion
+
     #region Event Handlers
+    /*
+     * Think of components as being mini pages. They have Page_Load events too. 
+     * This can be used to set initial values or state.
+     */
     protected void Page_Load(object sender, EventArgs e)
     {
         MessagePanel.Visible = false;
     }
     #endregion
+
     #region Public methods - show messages and process requests within try/catch
     /// <summary>
     /// Displays a message in the message panel with a general title of "Usage Instructions"
@@ -52,6 +58,12 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
     public void TryRun(ProcessRequest callback)
     {
         TryCatch(callback);
+    }
+
+    public void TryRun(ProcessRequest callback, bool suppressFeedback)
+    {
+        TryCatch(callback);
+        MessagePanel.Visible = !suppressFeedback;
     }
     /// <summary>
     /// Processes a request through a callback delegate within a try/catch block. Distinguished Entity Framework exceptions from general exceptions.
@@ -95,6 +107,10 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
             callback();
             return true;
         }
+        catch (BusinessRuleException ex)
+        {
+            HandleException(ex);
+        }
         catch (DbEntityValidationException ex)
         {
             HandleException(ex);
@@ -105,6 +121,20 @@ public partial class UserControls_MessageUserControl : System.Web.UI.UserControl
         }
         return false;
     }
+    /// <summary>
+    /// Handles a BusinessRuleException by displaying the details and general error.
+    /// </summary>
+    /// <param name="ex">An exception object generated from Entity Framework</param>
+    private void HandleException(BusinessRuleException ex)
+    {
+        var details = from detail in ex.RuleDetails
+                      select new
+                      {
+                          Error = detail
+                      };
+        ShowExceptions(details, ex.Message, STR_TITLE_ValidationErrors, STR_TITLE_ICON_warning, STR_PANEL_danger);
+    }
+
     /// <summary>
     /// Handles a DbEntityValidationException by getting the details of each validation error and showing it as a Validation Exception.
     /// </summary>
