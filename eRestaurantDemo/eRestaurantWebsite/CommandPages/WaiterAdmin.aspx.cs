@@ -59,7 +59,8 @@ public partial class CommandPages_WaiterAdmin : System.Web.UI.Page
 
         if (waiter.ReleaseDate.HasValue)
         {
-            DateReleased.Text = waiter.ReleaseDate.ToString();
+            DateTime rDate = DateTime.Parse(waiter.ReleaseDate.ToString());
+            DateReleased.Text = rDate.ToString("MM/dd/yyyy");
         }
         
     
@@ -74,5 +75,63 @@ public partial class CommandPages_WaiterAdmin : System.Web.UI.Page
         Address.Text        = "";
         DateHired.Text      = "";
         DateReleased.Text   = "";
+    }
+
+    protected void WaiterInsert_Click(object sender, EventArgs e)
+    {
+        MessageUserControl.TryRun(() =>
+            {
+                Waiter item = new Waiter();
+                item.FirstName = FirstName.Text;
+                item.LastName = LastName.Text;
+                item.Phone = Phone.Text;
+                item.Address = Address.Text;
+                item.HireDate = DateTime.Parse(DateHired.Text);
+
+                item.ReleaseDate = null;
+
+                AdminController sysmgr = new AdminController();
+                WaiterID.Text = sysmgr.Waiter_Add(item).ToString();
+
+            }
+        );
+            
+        
+            
+    }
+    protected void WaiterUpdate_Click(object sender, EventArgs e)
+    {   
+        int waiterId;
+        if (! int.TryParse(WaiterID.Text, out waiterId))
+        {
+            MessageUserControl.ShowInfo("Please Select a Waiter First.");
+            return;
+        }
+
+        MessageUserControl.TryRun(() =>
+            {
+                Waiter item = new Waiter();
+                item.WaiterID = waiterId;
+                item.FirstName = FirstName.Text;
+                item.LastName = LastName.Text;
+                item.Phone = Phone.Text;
+                item.Address = Address.Text;
+                item.HireDate = DateTime.Parse(DateHired.Text);
+
+                if (string.IsNullOrEmpty(DateReleased.Text))
+                {
+                    item.ReleaseDate = null;
+                }
+                else
+                {
+                    item.ReleaseDate = DateTime.Parse(DateReleased.Text);
+                }
+
+                AdminController sysmgr = new AdminController();
+                sysmgr.Waiter_Update(item);
+
+            }
+        );
+
     }
 }

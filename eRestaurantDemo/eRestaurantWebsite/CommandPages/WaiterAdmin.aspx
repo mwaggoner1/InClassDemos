@@ -27,7 +27,7 @@
         <tr>
             <td align="right" style="padding-right:30px">ID:</td>
             <td style="width: 291px">
-                <asp:Label ID="WaiterID" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="WaiterID" runat="server" Text=""></asp:Label>
             </td>
             <td>&nbsp;</td>
         </tr>
@@ -88,9 +88,9 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:30px">
-                <asp:LinkButton ID="Insert" runat="server">Insert Waiter</asp:LinkButton></td></td>
+                <asp:LinkButton ID="Insert" runat="server" OnClick="WaiterInsert_Click">Insert Waiter</asp:LinkButton></td></td>
             <td style="width: 291px">
-                <asp:LinkButton ID="Update" runat="server">Update Waiter</asp:LinkButton>
+                <asp:LinkButton ID="Update" runat="server" OnClick="WaiterUpdate_Click">Update Waiter</asp:LinkButton>
             </td>
             <td>&nbsp;</td>
         </tr>

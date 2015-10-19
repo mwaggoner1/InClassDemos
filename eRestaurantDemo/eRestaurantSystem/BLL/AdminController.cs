@@ -182,12 +182,13 @@ namespace eRestaurantSystem.BLL
         }
         
         [DataObjectMethod(DataObjectMethodType.Insert, false)]
-        public void Waiter_Add(Waiter item)
+        public int Waiter_Add(Waiter item)
         {
             using (eRestaurantContext context = new eRestaurantContext())
             {
                 var added = context.Waiters.Add(item);
                 context.SaveChanges();
+                return added.WaiterID;
             }
         }
 
