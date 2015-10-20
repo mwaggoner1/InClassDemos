@@ -55,6 +55,7 @@
     <Compile Include="Entities\Bill.cs" />
     <Compile Include="Entities\DTOs\CategoryMenuItem.cs" />
     <Compile Include="Entities\DTOs\ReservationByDate.cs" />
+    <Compile Include="Entities\POCOs\CategoryMenuItems.cs" />
     <Compile Include="Entities\POCOs\MenuItem.cs" />
     <Compile Include="Entities\POCOs\ReservationDetail.cs" />
     <Compile Include="Entities\Item.cs" />

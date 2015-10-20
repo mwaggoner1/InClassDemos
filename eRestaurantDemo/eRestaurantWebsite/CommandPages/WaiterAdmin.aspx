@@ -13,8 +13,8 @@
         <tr>
             <td align="right" style="padding-right:30px">Select Waiter</td>
             <td style="width: 291px">
-                <asp:DropDownList ID="WaiterSelect" runat="server" AppendDataBoundItems="True" AutoPostBack="True" DataSourceID="WaiterDataSource" DataTextField="FullName" DataValueField="WaiterID" Height="18px" OnSelectedIndexChanged="WaiterSelect_SelectedIndexChanged" Width="175px">
-                    <asp:ListItem>Select a Waiter</asp:ListItem>
+                <asp:DropDownList ID="WaiterSelect" runat="server" AppendDataBoundItems="False" AutoPostBack="True" DataSourceID="WaiterDataSource" DataTextField="FullName" DataValueField="WaiterID" Height="18px" OnSelectedIndexChanged="WaiterSelect_SelectedIndexChanged" Width="175px">
+                    
                 </asp:DropDownList>
             </td>
             <td>&nbsp;</td>

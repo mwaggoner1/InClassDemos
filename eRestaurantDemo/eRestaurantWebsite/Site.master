@@ -50,11 +50,31 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/SamplePages/SpecialEventsAdmin.aspx">Special Events</a></li>
-                        <li><a runat="server" href="~/SamplePages/ListView.aspx">ListView</a></li>
-                        <li><a runat="server" href="~/SamplePages/ReservationsByDate.aspx">Repeater Display</a></li>
-                        <li><a runat="server" href="~/CommandPages/SpecialEventsAdmin.aspx">ListView CRUD</a></li>
+                        
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Components Demos<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a runat="server" href="~/SamplePages/SpecialEventsAdmin.aspx">Special Events</a></li>
+                            <li><a runat="server" href="~/SamplePages/ListView.aspx">ListView</a></li>
+                            <li><a runat="server" href="~/SamplePages/ReservationsByDate.aspx">Repeater Display</a></li>
+                          </ul>
+                        </li>
+
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Command Pages <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a runat="server" href="~/CommandPages/SpecialEventsAdmin.aspx">ListView CRUD</a></li>
+                          </ul>
+                        </li>
+
+
+                        
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reporting <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a runat="server" href="~/Reports/ReportCategoryMenuItems.aspx">Category Menu Items</a></li>
+                          </ul>
+                        </li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
