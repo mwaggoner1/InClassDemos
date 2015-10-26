@@ -241,7 +241,35 @@ namespace eRestaurantSystem.BLL
 
         #endregion
 
+        #region WaiterBills Reporting
 
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<WaiterBilling> GetReportWaiterBills()
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                
+                var results = from b in context.Bills
+                                where b.BillDate.Month == 5
+                                orderby b.BillDate descending, b.Waiter.LastName ascending, b.Waiter.FirstName ascending
+                                select new WaiterBilling
+                                {
+                                    BillDate = b.BillDate,
+                                    Name = b.Waiter.LastName + " " + b.Waiter.FirstName,
+                                    BillID = b.BillID,
+                                    BillTotal = b.Items.Sum(bitem => bitem.Quantity * bitem.SalePrice),
+                                    PartySize = b.NumberInParty,
+                                    Contact = b.Reservation.CustomerName
+
+                                };
+
+                return results.ToList();
+                
+                
+            }
+        }
+
+        #endregion
     }
 }
 

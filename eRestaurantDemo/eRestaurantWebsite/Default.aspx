@@ -38,4 +38,17 @@
             </p>
         </div>
     </div>
+
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1">
+        <Columns>
+            <asp:BoundField DataField="BillDate" HeaderText="BillDate" SortExpression="BillDate" />
+            <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+            <asp:BoundField DataField="BillID" HeaderText="BillID" SortExpression="BillID" />
+            <asp:BoundField DataField="BillTotal" HeaderText="BillTotal" SortExpression="BillTotal" />
+            <asp:BoundField DataField="PartySize" HeaderText="PartySize" SortExpression="PartySize" />
+            <asp:BoundField DataField="Contact" HeaderText="Contact" SortExpression="Contact" />
+        </Columns>
+    </asp:GridView>
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetReportWaiterBills" TypeName="eRestaurantSystem.BLL.AdminController"></asp:ObjectDataSource>
+
 </asp:Content>
