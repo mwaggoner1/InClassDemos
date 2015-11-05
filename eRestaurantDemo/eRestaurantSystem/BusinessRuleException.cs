@@ -16,3 +16,4 @@ public class BusinessRuleException : Exception
         this.RuleDetails = reasons;
     }
 }
+
