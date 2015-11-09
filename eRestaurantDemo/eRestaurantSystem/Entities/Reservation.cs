@@ -41,6 +41,17 @@ namespace eRestaurantSystem.Entities
         // refering to the tables table.
 
         public virtual ICollection<Table> Tables { get; set; }
+        public virtual ICollection<Bill> Bills { get; set; }
+
+        public const string BOOKED      = "B";
+        public const string ARRIVED     = "A";
+        public const string COMPLETED   = "C";
+        public const string CANCELED    = "X";
+        public const string NO_SHOW     = "N"; 
+ 
+
+ 
+
 
 
     }
